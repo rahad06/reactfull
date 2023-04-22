@@ -45,4 +45,17 @@ public class UsersController : ControllerBase
     }
 
     
+    [HttpGet("{id}")]
+    public async Task<ActionResult<User>> GetUserById(int id)
+    {
+        var user = await _dbContext.Users.FindAsync(id);
+
+        if (user == null)
+        {
+            return NotFound("User not found");
+        }
+
+        return Ok(user);
+    }
+    
 }

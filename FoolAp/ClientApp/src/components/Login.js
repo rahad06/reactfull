@@ -1,25 +1,29 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userName, setUserName] = useState("");
+   let navigate = useNavigate();
+    function handleLoging() {
+        navigate("/panel");
+    }
+
     useEffect(()=>{
         getUsers().then(w => console.log(w))
     },[])
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userName, email, password }),
-        });
-        if (response.ok) {
-            console.log("Login successful!");
-        } else {
-            console.log("Login failed!");
+        try {
+            const response = await axios.post('https://localhost:44476/api/login', { userName, email, password });
+            if (response.status === 200) {
+                // Redirect to panel
+                handleLoging();            }
+        } catch (error) {
+            console.error(error);
         }
     };
     const getUsers = async () => {

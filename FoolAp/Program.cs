@@ -45,7 +45,13 @@ builder.Services.Configure<IdentityOptions>(options =>
         RequireUppercase = false,
     };
 });
-
+builder.Services.AddSession(options =>
+{
+    // Set the timeout duration for the session
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
@@ -77,6 +83,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseIdentityServer();
 app.UseAuthorization();
+app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {

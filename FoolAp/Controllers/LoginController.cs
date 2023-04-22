@@ -1,12 +1,14 @@
+using System.Security.Claims;
 using FoolAp.Data;
 using FoolAp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoolAp.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("/api/[controller]")]
 public class LoginController : ControllerBase
 {
     private readonly ApplicationDbContext _dbContext;
@@ -36,9 +38,16 @@ public class LoginController : ControllerBase
         }
 
         // Set session variables
-        HttpContext.Session.SetInt32("UserId", user.Id);
+// Set session variables
         HttpContext.Session.SetString("UserName", user.UserName);
+
+// Get session variables
+        var userName = HttpContext.Session.GetString("UserName");
 
         return Ok();
     }
+    
+    
+   
+
 }

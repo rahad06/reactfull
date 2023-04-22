@@ -15,10 +15,12 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     public DbSet<Product> Products { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Contact> Contacts { get; set; }
+    
+    public DbSet<About> Abouts { get; set; }
 
     public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
     
-    
+
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -37,6 +39,11 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
 
             entity.HasIndex(e => e.DeviceCode).IsUnique();
         });
+        
+        
+
+   
+        
     }
     
 }

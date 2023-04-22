@@ -3,6 +3,8 @@ import axios from "axios";
 import { useDispatch } from 'react-redux';
 
 import Contact from './Contact/index'
+import About from './About/index'
+import withAuth from "../Store/withAuth";
 
 const Panel = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -37,10 +39,11 @@ const Panel = () => {
         <div>
             <h1>Welcome to the panel, {userInfo.userName}!</h1>
             <p>Your email address is {userInfo.email}.</p>
-            <p>You joined on {userInfo.joinDate}.</p>
+
             <Contact/>
+            <About/>
         </div>
     );
 };
 
-export default Panel;
+export default withAuth(Panel, ['admin']);

@@ -8,6 +8,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using Microsoft.EntityFrameworkCore;
 using FoolAp.Data;
 using FoolAp.Models;
+using FoolAp.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,18 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 });
 
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Configure password hashing using Argon2i algorithm
+    options.Password = new PasswordOptions
+    {
+        RequiredLength = 8,
+        RequireNonAlphanumeric = false,
+        RequireDigit = false,
+        RequireLowercase = false,
+        RequireUppercase = false,
+    };
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

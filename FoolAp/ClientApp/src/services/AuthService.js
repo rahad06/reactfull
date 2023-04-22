@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default class AuthService {
     static async login(username, password) {
-        const response = await axios.post(`/api/Users/login`, { username, password });
+        const response = await axios.post(`/api/login`, { username, password });
         return response.data;
     }
 

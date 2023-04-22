@@ -11,13 +11,15 @@ const LoginPage = () => {
     },[])
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const response = await axios.post("/api/users/login", { userName, email, password });
-            // Handle successful login
-            console.log(response.data);
-        } catch (error) {
-            // Handle login error
-            console.error(error);
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userName, email, password }),
+        });
+        if (response.ok) {
+            console.log("Login successful!");
+        } else {
+            console.log("Login failed!");
         }
     };
     const getUsers = async () => {

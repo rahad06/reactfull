@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using BCrypt.Net;
 using FoolAp.Data;
 using FoolAp.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -22,17 +23,18 @@ public class UsersController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(User model)
     {
-        // Check if the username already exists
-        if (await _dbContext.Users.AnyAsync(u => u.Username == model.Username))
+        // Check if the UserName already exists
+        if (await _dbContext.Users.AnyAsync(u => u.UserName == model.UserName))
         {
-            return BadRequest("Username already exists");
+            return BadRequest("UserName already exists");
         }
 
         // Create a new user
         var user = new User
         {
-            Username = model.Username,
-            Password = BCrypt.Net.BCrypt.HashPassword(model.Password)
+            UserName = model.UserName,
+            Email = model.Email,
+            Password = BCrypt.Net.BCrypt.HashPassword(model.Password, BCrypt.Net.BCrypt.GenerateSalt(), true, HashType.SHA512)
         };
         await _dbContext.Users.AddAsync(user);
         await _dbContext.SaveChangesAsync();
@@ -41,30 +43,42 @@ public class UsersController : ControllerBase
     }
 
     [HttpPost("login")]
+
     public async Task<IActionResult> Login(User model)
     {
-        // Find the user by username
-        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.Username == model.Username);
+        // Find the user by UserName
+        var user = await _dbContext.Users.SingleOrDefaultAsync(u => u.UserName == model.UserName);
         if (user == null)
         {
-            return BadRequest("Invalid username or password");
+            return BadRequest("Invalid UserName or password");
         }
 
         // Verify the password
         if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
         {
-            return BadRequest("Invalid username or password");
+
+// Hash password
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(model.Password, BCrypt.Net.BCrypt.GenerateSalt(12));
+
+// Verify password
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, hashedPassword);
+            
         }
 
-        // Create the authentication ticket
-        var claims = new List<Claim>
+        // Set session variables
+        HttpContext.Session.SetInt32("UserId", user.Id);
+        HttpContext.Session.SetString("UserName", user.UserName);
+
+        var authProperties = new AuthenticationProperties
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Name, user.Username)
+            IsPersistent = model.RememberMe,
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(15)
         };
-        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        var principal = new ClaimsPrincipal(identity);
-        await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            new ClaimsPrincipal(),
+            authProperties);
 
         return Ok();
     }
@@ -75,4 +89,19 @@ public class UsersController : ControllerBase
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         return Ok();
     }
+    
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
+    {
+        var users = await _dbContext.Users.ToListAsync();
+
+        if (users == null || users.Count == 0)
+        {
+            return NotFound("No users found");
+        }
+
+        return Ok(users);
+    }
+
+    
 }

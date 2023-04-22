@@ -1,6 +1,16 @@
 import React from 'react';
 
 function TableWProps(props) {
+    function handleEdit(e) {
+        e.preventDefault();
+
+    }
+
+    function handleDelete(e) {
+        e.preventDefault();
+
+    }
+
     return (
         <>
             <div className="card">
@@ -10,20 +20,22 @@ function TableWProps(props) {
                         <table className="table">
                             <thead>
                             <tr>
-                                <th>Profile</th>
-                                <th>VatNo.</th>
-                                <th>Created</th>
-                                <th>Status</th>
+                                {props.data?.map((d, i) => (
+                                    <th key={i}>{d.title}</th>
+                                ))}
                             </tr>
                             </thead>
                             <tbody>
-                            {props.blog?.map((b,i) => (
-                            <tr key={i}>
-                                <td>{b.title}</td>
-                                <td>{b.id}</td>
-                                <td>15 May 2017</td>
-                                <td><label className="badge badge-warning">In progress</label></td>
-                            </tr>
+                            {props.data?.map((b, i) => (
+                                <tr key={i}>
+                                    <td>{b.title}</td>
+                                    <td>{b.id}</td>
+                                    <td>
+                                        <button onClick={e => handleEdit(e)} className="btn btn-primary">Edit</button>
+                                        <button onClick={e => handleDelete(e)} className="btn btn-outline-danger">Delete
+                                        </button>
+                                    </td>
+                                </tr>
                             ))}
                             </tbody>
                         </table>

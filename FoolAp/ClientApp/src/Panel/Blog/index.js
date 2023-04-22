@@ -24,7 +24,10 @@ function Blog(props) {
     return (
         <>
             {blog ? (
-        <TableWProps blog={blog}></TableWProps>
+        <TableWProps 
+            data={blog}
+            
+        ></TableWProps>
             ) : null 
             }
         </>

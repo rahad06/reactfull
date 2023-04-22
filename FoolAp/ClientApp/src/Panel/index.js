@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
-import { setUserLoggedIn } from '../Store/actions/authActions'
-import { setUser } from '../Store/actions/'
+
+import Contact from './Contact/index'
 
 const Panel = () => {
     const [userInfo, setUserInfo] = useState({});
-    const dispatch = useDispatch();
 
+    
     useEffect(() => {
         const getUserInfo = async () => {
             try {
@@ -22,22 +22,23 @@ const Panel = () => {
         
         
     }, []);
-    useEffect(() => {
-        const userInfo = {
-            id: sessionStorage.getItem('id'),
-            username: sessionStorage.getItem('username'),
-            email: sessionStorage.getItem('email'),
-            role: sessionStorage.getItem('role'),
-        };
-
-        dispatch(setUser(userInfo));
-        dispatch(setUserLoggedIn(true));
-    }, [dispatch]);
+    // useEffect(() => {
+    //     const userInfo = {
+    //         id: sessionStorage.getItem('id'),
+    //         username: sessionStorage.getItem('username'),
+    //         email: sessionStorage.getItem('email'),
+    //         role: sessionStorage.getItem('role'),
+    //     };
+    //
+    //     dispatch(setUser(userInfo));
+    //     dispatch(setUserLoggedIn(true));
+    // }, [dispatch]);
     return (
         <div>
             <h1>Welcome to the panel, {userInfo.userName}!</h1>
             <p>Your email address is {userInfo.email}.</p>
             <p>You joined on {userInfo.joinDate}.</p>
+            <Contact/>
         </div>
     );
 };

@@ -7,8 +7,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev/index.ts";
-import {Provider} from "react-redux";
-import {store} from './Store/index'
+
 
 const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');
 const rootElement = document.getElementById('root');
@@ -16,7 +15,6 @@ const root = createRoot(rootElement);
 
 root.render(
     
-    <Provider store={store}>
     <BrowserRouter basename={baseUrl}>
         <DevSupport ComponentPreviews={ComponentPreviews}
                     useInitialHook={useInitial}
@@ -24,7 +22,6 @@ root.render(
             <App/>
         </DevSupport>
     </BrowserRouter>
-    </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

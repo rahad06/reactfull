@@ -14,5 +14,29 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     }
     public DbSet<Product> Products { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
 
+    public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
+    
+    
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<DeviceFlowCodes>(entity =>
+        {
+
+            entity.Property(e => e.DeviceCode).HasMaxLength(200).IsRequired();
+     
+            
+            entity.Property(e => e.CreationTime).IsRequired();
+            entity.Property(e => e.Expiration).IsRequired();
+            entity.Property(e => e.Data).HasMaxLength(50000);
+
+
+            entity.HasIndex(e => e.DeviceCode).IsUnique();
+        });
+    }
+    
 }

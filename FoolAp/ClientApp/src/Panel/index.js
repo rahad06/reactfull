@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from 'react-redux';
+
 
 import Contact from './Contact/index'
 import About from './About/index'
-import withAuth from "../Store/withAuth";
+import PanelMenu from "./Common/PanelMenu";
+import TableEl from "../components/Common/TableEl";
+
+
 
 const Panel = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -36,14 +39,13 @@ const Panel = () => {
     //     dispatch(setUserLoggedIn(true));
     // }, [dispatch]);
     return (
-        <div>
+        <div className="container">
             <h1>Welcome to the panel, {userInfo.userName}!</h1>
             <p>Your email address is {userInfo.email}.</p>
-
-            <Contact/>
-            <About/>
+            <PanelMenu></PanelMenu>
+            <TableEl></TableEl>
         </div>
     );
 };
 
-export default withAuth(Panel, ['admin']);
+export default Panel

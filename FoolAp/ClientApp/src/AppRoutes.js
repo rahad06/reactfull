@@ -5,6 +5,10 @@ import { Home } from "./components/Home";
 import ProductList from "./components/ProductList";
 import Login from "./components/Login";
 import Panel from "./Panel";
+import About from "./Panel/About";
+import Contact from "./Panel/Contact";
+import ContactUs from "./siteUI/pages/ContactUs";
+import Blog from "./Panel/Blog";
 
 const AppRoutes = [
   {
@@ -18,6 +22,22 @@ const AppRoutes = [
   {
     path: '/panel',
     element: <Panel />
+  },
+  {
+    path: '/panel/about',
+    element: <About />
+  },
+  {
+    path: '/panel/contact',
+    element: <Contact />
+  },
+  {
+    path: '/panel/blog',
+    element: <Blog />
+  },
+  {
+    path: '/contactus',
+    element: <ContactUs />
   },
   {
     path: '/fetch-data',

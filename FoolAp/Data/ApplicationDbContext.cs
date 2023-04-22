@@ -14,9 +14,13 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     }
     public DbSet<Product> Products { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<SettingsGeneral> SettingsGeneral { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     
     public DbSet<About> Abouts { get; set; }
+    public DbSet<BlogPost> BlogPosts { get; set; }
+    public DbSet<Porfolio> Projects { get; set; }
+    public DbSet<Service> Services { get; set; }
 
     public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
     

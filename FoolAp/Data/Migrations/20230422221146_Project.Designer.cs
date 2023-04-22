@@ -3,6 +3,7 @@ using System;
 using FoolAp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoolAp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230422221146_Project")]
+    partial class Project
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.15");
@@ -403,72 +405,6 @@ namespace FoolAp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("FoolAp.Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Services");
-                });
-
-            modelBuilder.Entity("FoolAp.Models.SettingsGeneral", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("FavIcon")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Logo")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LongDescription")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SettingsGeneral");
                 });
 
             modelBuilder.Entity("FoolAp.Models.User", b =>

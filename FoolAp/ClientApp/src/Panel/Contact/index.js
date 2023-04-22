@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 const Contact = () => {
@@ -15,14 +15,16 @@ const Contact = () => {
     }
 
     const handleInputChange = (event) => {
-        const { name, value } = event.target;
+        console.log(event)
+        const {name, value} = event.target;
         setContact(prevContact => ({
             ...prevContact,
             [name]: value
         }));
     }
 
-    const handleSaveContact = async () => {
+    const handleSaveContact = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.put(`/api/contact/${contact.language}`, contact);
             console.log(response.data); // success message
@@ -32,25 +34,29 @@ const Contact = () => {
     }
 
     useEffect(() => {
-        fetchContact('en'); // set default language to English
+        fetchContact('fa'); // set default language to English
     }, []);
 
     return (
-        <div>
-            <h1>Contact Panel</h1>
-            <div>
-                <label htmlFor="language-select">Select Language:</label>
-                <select id="language-select" onChange={handleLanguageChange}>
-                    <option value="En">English</option>
-                    <option value="Fa">Persian</option>
-                </select>
+
+        <div className="card">
+            <div className="card-body">
+                <h4 className="card-title">Default form</h4>
+                <p className="card-description">
+                    Basic form layout
+                </p>
+                <form className="forms-sample" onSubmit={e => handleSaveContact(e)}>
+                    <div className="form-group">
+                        <label htmlFor="exampleInputUsername1">Username</label>
+                        <input name="phone" type="text" className="form-control" id="exampleInputUsername1"
+                               placeholder={contact.phone} onChange={e => handleInputChange(e)}/>
+                    </div>
+                    <button type="submit" className="btn btn-primary me-2">Submit</button>
+                    <button className="btn btn-light">Cancel</button>
+                </form>
             </div>
-            <div>
-                <label htmlFor="title-input">Email:</label>
-                <input type="text" id="title-input" name="title" value={contact.email || ''} onChange={handleInputChange} />
-            </div>
-            <button onClick={handleSaveContact}>Save</button>
         </div>
+
     );
 };
 

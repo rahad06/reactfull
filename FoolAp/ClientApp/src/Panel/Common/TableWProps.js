@@ -1,15 +1,6 @@
 import React from 'react';
-
 function TableWProps(props) {
-    function handleEdit(e) {
-        e.preventDefault();
-
-    }
-
-    function handleDelete(e) {
-        e.preventDefault();
-
-    }
+  
 
     return (
         <>
@@ -27,13 +18,21 @@ function TableWProps(props) {
                             </thead>
                             <tbody>
                             {props.data?.map((b, i) => (
-                                <tr key={i}>
+                                <tr key={i} className={`${props.isFullWidth ? "w-100" : ""}`}>
                                     <td>{b.title}</td>
                                     <td>{b.id}</td>
                                     <td>
-                                        <button onClick={e => handleEdit(e)} className="btn btn-primary">Edit</button>
-                                        <button onClick={e => handleDelete(e)} className="btn btn-outline-danger">Delete
+                                        {props.isEditable ? (
+                                        <button onClick={e => props.handleEdit(e)} className="btn mx-1 text-success">
+                                            <i className="ri-edit-line"></i>
                                         </button>
+                                        ) : null}
+                                        {props.isDeletable ? (
+                                        <button onClick={e => props.handleDelete(e)} className="btn text-danger">
+                                            <i className="ri-delete-bin-3-line"></i>
+                                        </button>
+
+                                        ) : null}
                                     </td>
                                 </tr>
                             ))}

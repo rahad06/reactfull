@@ -4,7 +4,7 @@ import AppRoutes from './AppRoutes';
 import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import { Layout } from './components/Layout';
 import './custom.css';
-
+import './styles/remixicon.css';
 export default class App extends Component {
   static displayName = App.name;
 

@@ -20,14 +20,30 @@ function Blog(props) {
             console.error(error);
         }
     }
+    function handleEdit(e) {
+        e.preventDefault();
+
+    }
+
+    function handleDelete(e) {
+        e.preventDefault();
+
+    }
 
     return (
         <>
             {blog ? (
+                    <div className="row align-items-center justify-content-center"><div className="col-8">
         <TableWProps 
             data={blog}
-            
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            isEditable={true}
+            isDeletable={true}
+            isFullWidth="w-100"
         ></TableWProps>
+                    </div>
+                    </div>
             ) : null 
             }
         </>

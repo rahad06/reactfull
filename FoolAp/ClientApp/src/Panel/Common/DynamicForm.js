@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import * as PropTypes from "prop-types";
+import DynamicFormInput from "./DynamicFormInput";
 
-const DynamicForm = () => {
+
+
+const DynamicForm = (props) => {
     const [inputType, setInputType] = useState('text');
-
+    useEffect(() => {
+        console.log(props);
+        setInputType(props.inputType)
+    }, [props])
     const handleTypeChange = (e) => {
         setInputType(e.target.value);
     };
@@ -10,16 +17,8 @@ const DynamicForm = () => {
   
 
     return (
-        <div>
-            <label>
-                Input Type:
-                <select value={inputType} onChange={handleTypeChange}>
-                    <option value="text">Text</option>
-                    <option value="email">Email</option>
-                    <option value="password">Password</option>
-                </select>
-            </label>
-            {renderInput()}
+        <div key={props.key}>
+            <DynamicFormInput inputType={inputType} handleTypeChange={handleTypeChange} />
         </div>
     );
 };

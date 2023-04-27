@@ -10,7 +10,7 @@ export default class AuthorizeRoute extends Component {
 
     this.state = {
       ready: false,
-      authenticated: false
+      authenticated: true
     };
   }
 

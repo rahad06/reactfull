@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import DynamicForm from "../Common/DynamicForm";
 
 export default function About ()  {
     const [aboutEn, setAboutEn] = useState(null);
@@ -32,10 +33,15 @@ export default function About ()  {
         e.preventDefault();
         await axios.post('/api/about', aboutFa);
     };
+    let inputType = [
+        'text','textarea','email','password','number','radio',
+    ]
 
     return (
      <>
-     
+         {inputType?.map((input, index) => (
+             <DynamicForm key={index} inputType={input}></DynamicForm>
+         ))}
      </>
     )
 }

@@ -21,15 +21,18 @@ const AppRoutes = [
   },
   {
     path: '/panel',
-    element: <Panel />
+    element: <Panel />,
+    requireAuth: true
   },
   {
     path: '/panel/about',
-    element: <About />
+    element: <About />,
+    requireAuth: true
   },
   {
     path: '/panel/contact',
-    element: <Contact />
+    element: <Contact />,
+    requireAuth: true
   },
   {
     path: '/panel/blog',

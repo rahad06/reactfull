@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 
 
@@ -6,13 +6,14 @@ import Contact from './Contact/index'
 import About from './About/index'
 import PanelMenu from "./Common/PanelMenu";
 import TableEl from "../components/Common/TableEl";
-
+import {Container} from "reactstrap";
+import {NavMenu} from "../components/NavMenu";
 
 
 const Panel = () => {
     const [userInfo, setUserInfo] = useState({});
 
-    
+
     useEffect(() => {
         const getUserInfo = async () => {
             try {
@@ -24,8 +25,8 @@ const Panel = () => {
         };
 
         getUserInfo().then(res => console.log(res))
-        
-        
+
+
     }, []);
     // useEffect(() => {
     //     const userInfo = {
@@ -39,12 +40,16 @@ const Panel = () => {
     //     dispatch(setUserLoggedIn(true));
     // }, [dispatch]);
     return (
-        <div className="container">
-            <h1>Welcome to the panel, {userInfo.userName}!</h1>
-            <p>Your email address is {userInfo.email}.</p>
-            <PanelMenu></PanelMenu>
-            <TableEl></TableEl>
-        </div>
+        <>
+            <Container className="p-20">
+                <div className="row "><div className="col">
+                    <h1>Welcome to the panel, {userInfo.userName}!</h1>
+                    <p>Your email address is {userInfo.email}.</p>
+                </div><div className="col-4">
+                    <TableEl></TableEl>
+                </div></div>
+                </Container>
+        </>
     );
 };
 

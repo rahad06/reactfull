@@ -22,6 +22,7 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     public DbSet<Porfolio> Projects { get; set; }
     public DbSet<Service> Services { get; set; }
     public DbSet<ContactForm> ContactForms { get; set; }
+    public DbSet<AccessLevel> AccessLevels { get; set; }
 
     public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
     

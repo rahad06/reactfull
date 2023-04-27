@@ -1,6 +1,6 @@
 import React from "react";
 
-function DynamicFormInput({ type, label, ...rest }) {
+export default function DynamicFormInput({ type, label, ...rest }) {
     switch (type) {
         case "text":
         case "email":

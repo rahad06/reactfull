@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="2d17eabd-651a-4459-89d8-50a624a9f778" name="services.gen1.chabokan.net" url="https://dotnetcore-d9lhw7.chbk.run/">
+        <fileTransfer host="services.gen1.chabokan.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

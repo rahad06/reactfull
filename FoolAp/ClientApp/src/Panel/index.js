@@ -8,7 +8,9 @@ import PanelMenu from "./Common/PanelMenu";
 import TableEl from "../components/Common/TableEl";
 import {Container} from "reactstrap";
 import {NavMenu} from "../components/NavMenu";
-
+import TopOverview from "./Home/TopOverview";
+import '../styles/panel.css';
+import PagesCards from "./Home/PagesCards";
 
 const Panel = () => {
     const [userInfo, setUserInfo] = useState({});
@@ -41,10 +43,12 @@ const Panel = () => {
     // }, [dispatch]);
     return (
         <>
-            <Container className="p-20">
-                <div className="row "><div className="col">
-                    <h1>Welcome to the panel, {userInfo.userName}!</h1>
-                    <p>Your email address is {userInfo.email}.</p>
+            <Container className="p-5">
+                <div className="row "><div className="col-8">
+                  <div className="home-tab home-dashboard-overview">
+                      <TopOverview/>
+                      <PagesCards></PagesCards>
+                  </div>
                 </div><div className="col-4">
                     <TableEl></TableEl>
                 </div></div>

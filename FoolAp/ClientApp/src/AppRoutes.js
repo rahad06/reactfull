@@ -1,7 +1,7 @@
 import ApiAuthorzationRoutes from './components/api-authorization/ApiAuthorizationRoutes';
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
-import { Home } from "./components/Home";
+import Home from "./Panel/Home"
 import ProductList from "./components/ProductList";
 import Login from "./components/Login";
 import Panel from "./Panel";
@@ -9,11 +9,12 @@ import About from "./Panel/About";
 import Contact from "./Panel/Contact";
 import ContactUs from "./siteUI/pages/ContactUs";
 import Blog from "./Panel/Blog";
+import SiteHome from "./siteUI/pages/SiteHome";
 
 const AppRoutes = [
   {
     index: true,
-    element: <Home />
+    element: <SiteHome />
   },
   {
     path: '/login',
@@ -22,6 +23,11 @@ const AppRoutes = [
   {
     path: '/panel',
     element: <Panel />,
+    requireAuth: true
+  },
+  {
+    path: '/panel/home',
+    element: <Home />,
     requireAuth: true
   },
   {

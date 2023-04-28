@@ -42,6 +42,7 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ClientApp\public\Styles" />
+      <Folder Include="ClientApp\src\siteUI\images" />
       <Folder Include="ClientApp\src\Store\actions" />
       <Folder Include="ClientApp\src\Store\models" />
       <Folder Include="ClientApp\src\Store\reducers" />
